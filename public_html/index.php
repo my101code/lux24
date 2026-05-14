@@ -1,7 +1,7 @@
 <?php
 $empresa = "Location de Yates";
 $lugar = "Marina Smir";
-$whatsapp = "212600000000";
+$whatsapp = "+212654926279";
 
 $destinos = [
     "Marina Smir",
