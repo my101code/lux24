@@ -1,0 +1,14 @@
+CREATE TABLE bloqueos_yates (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    yate_id BIGINT UNSIGNED NOT NULL,
+
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+
+    motivo VARCHAR(255) NULL,
+
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (yate_id) REFERENCES yates(id) ON DELETE CASCADE
+);

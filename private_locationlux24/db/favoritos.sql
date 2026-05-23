@@ -1,0 +1,13 @@
+CREATE TABLE favoritos (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    cliente_id BIGINT UNSIGNED NOT NULL,
+    yate_id BIGINT UNSIGNED NOT NULL,
+
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE KEY unico_favorito (cliente_id, yate_id),
+
+    FOREIGN KEY (cliente_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (yate_id) REFERENCES yates(id) ON DELETE CASCADE
+);

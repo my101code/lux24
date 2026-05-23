@@ -1,0 +1,16 @@
+CREATE TABLE valoraciones (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    reserva_id BIGINT UNSIGNED NOT NULL,
+    cliente_id BIGINT UNSIGNED NOT NULL,
+    yate_id BIGINT UNSIGNED NOT NULL,
+
+    puntuacion INT NOT NULL,
+    comentario TEXT NULL,
+
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (reserva_id) REFERENCES reservas(id) ON DELETE CASCADE,
+    FOREIGN KEY (cliente_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (yate_id) REFERENCES yates(id) ON DELETE CASCADE
+);

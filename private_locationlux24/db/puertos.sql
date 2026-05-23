@@ -1,0 +1,15 @@
+CREATE TABLE puertos (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    nombre VARCHAR(100) NOT NULL,
+    ciudad VARCHAR(100) NULL,
+    direccion VARCHAR(255) NULL,
+
+    latitud DECIMAL(10, 7) NULL,
+    longitud DECIMAL(10, 7) NULL,
+
+    estado ENUM('activo', 'inactivo') NOT NULL DEFAULT 'activo',
+
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
