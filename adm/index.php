@@ -23,6 +23,7 @@ $userName = $user['nombre'];
 			</div>
 			<div class="flex items-center gap-2">
 				<a href="usuarios.php" class="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-semibold">Usuarios</a>
+				<a href="puertos.php" class="rounded-lg bg-emerald-600 text-white px-4 py-2 text-sm font-semibold">Puertos</a>
 				<a href="../public_html/auth_logout.php" class="rounded-lg bg-slate-800 text-white px-4 py-2 text-sm font-semibold">Logout</a>
 			</div>
 		</div>
