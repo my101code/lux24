@@ -1,4 +1,21 @@
 <?php
+/*
+ * -----------------------------------------------------------------------------
+ * Archivo: adm/usuarios.php
+ * Modulo: Gestion administrativa de usuarios
+ * -----------------------------------------------------------------------------
+ * Resumen:
+ * - Restringe el acceso al modulo a usuarios con rol admin.
+ * - Permite actualizar rol y estado de los usuarios del sistema.
+ * - Evita acciones peligrosas sobre la cuenta admin autenticada.
+ * - Aplica validacion CSRF, busqueda y paginacion de usuarios.
+ *
+ * Flujo principal:
+ * 1) Verifica sesion admin y token CSRF en operaciones POST.
+ * 2) Procesa accion solicitada (cambiar rol o estado).
+ * 3) Carga listado filtrado/paginado de usuarios.
+ * 4) Muestra interfaz de administracion con formularios por fila.
+ */
 declare(strict_types=1);
 
 require_once __DIR__ . '/../private_locationlux24/auth.php';

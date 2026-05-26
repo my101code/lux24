@@ -1,7 +1,24 @@
 <?php
-declare(strict_types=1);
+/*
+ * -----------------------------------------------------------------------------
+ * Archivo: adm/auth_login.php
+ * Modulo: Acceso al panel de administracion
+ * -----------------------------------------------------------------------------
+ * Resumen:
+ * - Gestiona el login de usuarios con rol admin.
+ * - Valida nombre y contrasena enviados por POST.
+ * - Autentica contra el modelo de usuarios y crea sesion segura.
+ * - Redirige al panel principal cuando el acceso es correcto.
+ *
+ * Flujo principal:
+ * 1) Si ya existe sesion admin activa, redirige al panel.
+ * 2) Si llega POST, valida datos y credenciales.
+ * 3) Si todo es valido, guarda datos de sesion y redirige.
+ * 4) Si hay errores, los muestra en la vista.
+ */
+declare(strict_types=1); // Iniciar sesion para gestionar el estado de autenticacion
 
-session_start();
+session_start(); // Asegura que la sesion este activa para manejar autenticacion
 
 require_once __DIR__ . '/../private_locationlux24/models/usuarios.php';
 

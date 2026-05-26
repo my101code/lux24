@@ -1,4 +1,22 @@
 <?php
+/*
+ * -----------------------------------------------------------------------------
+ * Archivo: adm/puertos.php
+ * Modulo: Gestion administrativa de puertos
+ * -----------------------------------------------------------------------------
+ * Resumen:
+ * - Protege el acceso al modulo para administradores.
+ * - Gestiona operaciones CRUD parciales de puertos (crear y editar).
+ * - Permite actualizar el estado de cada puerto.
+ * - Implementa validacion CSRF, busqueda y paginacion de resultados.
+ * - Incluye utilidad para parsear latitud/longitud opcionales.
+ *
+ * Flujo principal:
+ * 1) Valida sesion admin y token CSRF en envios POST.
+ * 2) Ejecuta accion solicitada (crear, editar o cambiar estado).
+ * 3) Carga listado filtrado/paginado de puertos.
+ * 4) Renderiza formulario de alta/edicion y tabla de administracion.
+ */
 declare(strict_types=1);
 
 require_once __DIR__ . '/../private_locationlux24/auth.php';

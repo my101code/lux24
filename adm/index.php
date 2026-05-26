@@ -1,4 +1,20 @@
 <?php
+/*
+ * -----------------------------------------------------------------------------
+ * Archivo: adm/index.php
+ * Modulo: Panel principal de administracion
+ * -----------------------------------------------------------------------------
+ * Resumen:
+ * - Protege el acceso para usuarios autenticados con rol admin.
+ * - Carga los datos basicos del administrador en sesion.
+ * - Renderiza la pantalla de bienvenida del panel.
+ * - Ofrece accesos rapidos a gestion de usuarios, puertos y logout.
+ *
+ * Flujo principal:
+ * 1) Verifica autenticacion/rol con requireAdmin().
+ * 2) Obtiene el nombre del usuario autenticado.
+ * 3) Muestra la interfaz de navegacion del area administrativa.
+ */
 declare(strict_types=1);
 
 require_once __DIR__ . '/../private_locationlux24/auth.php';
