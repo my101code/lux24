@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../private_locationlux24/helpers.php';
+
 $empresa = "Lux24 Yates";
 
 $yates = [
@@ -51,61 +53,109 @@ $yates = [
 		"imagen" => "https://images.unsplash.com/photo-1528154291023-a6525fabe5b4?auto=format&fit=crop&w=1200&q=80"
 	]
 ];
+
+$cardsTailwindConfig = <<<'JS'
+tailwind.config = {
+	theme: {
+		extend: {
+			colors: {
+				brandNavy: "#08283A",
+				brandSea: "#0E7490",
+				brandSand: "#F3DFC1"
+			},
+			fontFamily: {
+				title: ["Cinzel", "serif"],
+				body: ["Manrope", "sans-serif"]
+			},
+			boxShadow: {
+				card: "0 20px 35px rgba(7, 32, 46, 0.18)"
+			}
+		}
+	}
+};
+JS;
+
+$cardsHeadCss = <<<'CSS'
+.hero-title {
+	animation: floatingTitle 4.2s ease-in-out infinite;
+}
+
+@keyframes floatingTitle {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-5px);
+	}
+}
+
+.swiper-button-disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+CSS;
+
+$cardsSliderScript = <<<'JS'
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+const slider = new Swiper("#cardsSlider", {
+	speed: 850,
+	grabCursor: true,
+	spaceBetween: 20,
+	loop: true,
+	freeMode: {
+		enabled: true,
+		momentumRatio: 0.45
+	},
+	autoplay: {
+		delay: 2400,
+		disableOnInteraction: false
+	},
+	breakpoints: {
+		0: {
+			slidesPerView: 1.05
+		},
+		640: {
+			slidesPerView: 2.1
+		},
+		1024: {
+			slidesPerView: 3.05
+		},
+		1280: {
+			slidesPerView: 3.4
+		}
+	}
+});
+
+prevBtn.addEventListener("click", () => slider.slidePrev());
+nextBtn.addEventListener("click", () => slider.slideNext());
+JS;
+
+render_partial('meta', [
+	'lang' => 'es',
+	'pageTitle' => $empresa . ' | Nuestros Yates',
+	'bodyClass' => 'font-body text-slate-800 bg-gradient-to-b from-sky-50 via-slate-50 to-white',
+	'headScripts' => [
+		'https://cdn.tailwindcss.com',
+	],
+	'headStyles' => [
+		'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+	],
+	'headLinks' => [
+		'rel="preconnect" href="https://fonts.googleapis.com"',
+		'rel="preconnect" href="https://fonts.gstatic.com" crossorigin',
+		'href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"',
+	],
+	'inlineHeadScripts' => [
+		$cardsTailwindConfig,
+	],
+	'inlineHeadStyles' => [
+		$cardsHeadCss,
+	],
+]);
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?= $empresa ?> | Nuestros Yates</title>
-	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
-	<script>
-		tailwind.config = {
-			theme: {
-				extend: {
-					colors: {
-						brandNavy: "#08283A",
-						brandSea: "#0E7490",
-						brandSand: "#F3DFC1"
-					},
-					fontFamily: {
-						title: ["Cinzel", "serif"],
-						body: ["Manrope", "sans-serif"]
-					},
-					boxShadow: {
-						card: "0 20px 35px rgba(7, 32, 46, 0.18)"
-					}
-				}
-			}
-		};
-	</script>
-	<style>
-		.hero-title {
-			animation: floatingTitle 4.2s ease-in-out infinite;
-		}
-
-		@keyframes floatingTitle {
-			0%,
-			100% {
-				transform: translateY(0);
-			}
-			50% {
-				transform: translateY(-5px);
-			}
-		}
-
-		.swiper-button-disabled {
-			opacity: 0.4;
-			cursor: not-allowed;
-		}
-	</style>
-</head>
-<body class="font-body text-slate-800 bg-gradient-to-b from-sky-50 via-slate-50 to-white">
 
 <header class="relative min-h-[70vh] overflow-hidden">
 	<img
@@ -158,43 +208,12 @@ $yates = [
 	</section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-
-const slider = new Swiper("#cardsSlider", {
-	speed: 850,
-	grabCursor: true,
-	spaceBetween: 20,
-	loop: true,
-	freeMode: {
-		enabled: true,
-		momentumRatio: 0.45
-	},
-	autoplay: {
-		delay: 2400,
-		disableOnInteraction: false
-	},
-	breakpoints: {
-		0: {
-			slidesPerView: 1.05
-		},
-		640: {
-			slidesPerView: 2.1
-		},
-		1024: {
-			slidesPerView: 3.05
-		},
-		1280: {
-			slidesPerView: 3.4
-		}
-	}
-});
-
-prevBtn.addEventListener("click", () => slider.slidePrev());
-nextBtn.addEventListener("click", () => slider.slideNext());
-</script>
-
-</body>
-</html>
+<?php
+render_partial('footer', [
+	'pageScripts' => [
+		'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+	],
+	'inlineScripts' => [
+		$cardsSliderScript,
+	],
+]);

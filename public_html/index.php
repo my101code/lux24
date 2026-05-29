@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../private_locationlux24/helpers.php';
+
 session_start();
 
 $empresa = "Location de Yates";
@@ -84,93 +86,59 @@ $yates = [
         "rating" => "4.8"
     ]
 ];
-?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title><?= $empresa ?> | <?= $lugar ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        page: "#B7CBC6",
-                        teal: "#08B8C7",
-                        tealDark: "#073C43",
-                        soft: "#F7F9F4",
-                        gold: "#D6A01D",
-                        cream: "#FFF8E7"
-                    },
-                    fontFamily: {
-                        title: ["Playfair Display", "serif"],
-                        body: ["Inter", "sans-serif"]
-                    },
-                    boxShadow: {
-                        soft: "0 20px 60px rgba(7,60,67,0.15)"
-                    }
-                }
+$indexTailwindConfig = <<<'JS'
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                page: "#B7CBC6",
+                teal: "#08B8C7",
+                tealDark: "#073C43",
+                soft: "#F7F9F4",
+                gold: "#D6A01D",
+                cream: "#FFF8E7"
+            },
+            fontFamily: {
+                title: ["Playfair Display", "serif"],
+                body: ["Inter", "sans-serif"]
+            },
+            boxShadow: {
+                soft: "0 20px 60px rgba(7,60,67,0.15)"
             }
         }
-    </script>
+    }
+}
+JS;
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-</head>
-
-<body class="bg-page font-body text-tealDark">
+render_partial('meta', [
+    'lang' => 'es',
+    'pageTitle' => $empresa . ' | ' . $lugar,
+    'bodyClass' => 'bg-page font-body text-tealDark',
+    'headScripts' => [
+        'https://cdn.tailwindcss.com',
+    ],
+    'headLinks' => [
+        'href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet"',
+    ],
+    'inlineHeadScripts' => [
+        $indexTailwindConfig,
+    ],
+]);
+?>
 
 <div class="max-w-[1420px] mx-auto p-4 md:p-8">
 
     <section class="gap-8 items-start">
 
         <div class="bg-soft rounded-[2rem] overflow-hidden shadow-soft">
-
-            <header class="h-20 flex items-center justify-between px-8 bg-soft">
-                <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-full border-2 border-tealDark flex items-center justify-center bg-white">
-                        <span class="text-xl">⚓</span>
-                    </div>
-                    <h1 class="text-2xl font-black">TripYacht</h1>
-                </div>
-
-                <nav class="hidden lg:flex items-center gap-8 text-sm font-bold">
-                    <a href="#" class="hover:text-teal">Inicio</a>
-                    <a href="#deals" class="hover:text-teal">Yates</a>
-                    <a href="#contacto" class="hover:text-teal">Reservas</a>
-                    <a href="#contacto" class="hover:text-teal">Contacto</a>
-                </nav>
-
-                <div class="hidden lg:flex items-center gap-3">
-                    <?php if ($isLoggedIn): ?>
-                        <span class="text-sm font-bold">Hola, <?= htmlspecialchars($userName, ENT_QUOTES, 'UTF-8') ?></span>
-                        <a href="auth_logout.php" class="bg-tealDark text-white px-5 py-2 rounded-md font-bold text-sm">
-                            Logout
-                        </a>
-                    <?php else: ?>
-                        <a href="auth_register.php" class="text-sm font-bold">Register</a>
-                        <a href="auth_login.php" class="bg-teal text-white px-5 py-2 rounded-md font-bold text-sm">
-                            Login
-                        </a>
-                    <?php endif; ?>
-                    <button class="text-sm font-bold">EN</button>
-                </div>
-
-                <button id="menuBtn" class="lg:hidden text-3xl">☰</button>
-            </header>
-
-            <div id="mobileMenu" class="hidden lg:hidden bg-white px-8 py-5 border-y border-teal/10">
-                <div class="flex flex-col gap-4 font-bold">
-                    <a href="#">Inicio</a>
-                    <a href="#deals">Yates</a>
-                    <a href="#contacto">Reservas</a>
-                    <a href="#contacto">Contacto</a>
-                </div>
-            </div>
+            <?php
+            render_partial('header', [
+                'isLoggedIn' => $isLoggedIn,
+                'userName' => $userName,
+                'brandTitle' => 'TripYacht',
+            ]);
+            ?>
 
             <section class="relative min-h-[520px] px-8 pb-10">
                 <div class="absolute inset-x-8 top-0 h-[460px] rounded-b-[2rem] overflow-hidden">
@@ -343,8 +311,9 @@ $yates = [
         </div>
     </div>
 </section>
-
-<script src="assets/js/app.js"></script>
-
-</body>
-</html>
+<?php
+render_partial('footer', [
+    'pageScripts' => [
+        'assets/js/app.js',
+    ],
+]);
