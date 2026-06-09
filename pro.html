@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>           
+            
+            fetch('https://dummyjson.com/products/1')
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);           // todo el objeto
+    console.log(data.title);     // título
+    console.log(data.price);     // precio
+    console.log(data.description); // descripción
+    console.log(data.brand);    // array de imágenes
+    console.log(data.category);   // array de imágenes
+  })
+  .catch(error => console.error(error));
+
+    </script>
+</body>
+</html>
